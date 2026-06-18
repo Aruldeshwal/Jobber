@@ -28,14 +28,14 @@ export default function DashboardLayout({
             Applications
           </Link>
           <Link
-            href="/analytics"
+            href="/dashboard/analytics"
             className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400"
           >
             <BarChart3 className="w-5 h-5" />
             Analytics
           </Link>
           <Link
-            href="/settings"
+            href="/dashboard/settings"
             className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400"
           >
             <Settings className="w-5 h-5" />
