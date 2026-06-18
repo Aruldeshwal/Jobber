@@ -18,7 +18,8 @@ JobTracker AI is a next-generation job application management system that levera
 
 ### AI & RAG Integration
 - **Vercel AI SDK:** To orchestrate LLM streams and RAG workflows.
-- **OpenAI / Gemini API:** For job summarization, matching logic, and embedding generation.
+- **OpenAI:** For job summarization, matching logic, and embedding generation (`text-embedding-3-small`).
+- **pdf-parse:** For server-side extraction of resume content from PDFs.
 - **Zod:** For rigorous schema validation of AI outputs and form data.
 
 ### State & Caching
@@ -27,46 +28,81 @@ JobTracker AI is a next-generation job application management system that levera
 
 ---
 
-## ✨ Finalized Features
+## ✨ Key Features
 
 ### 1. Smart Application Management
-- **Kanban Board:** Drag-and-drop workflow (Applied, Interviewing, Offer, Rejected).
-- **Automated Job Scraping:** Paste a URL to automatically extract company name, role, and description.
+- **Kanban Board:** Interactive drag-and-drop workflow (Applied, Interviewing, Offer, Rejected) powered by `@dnd-kit`.
+- **Automated Job Summarization:** AI automatically extracts key skills and responsibilities from job descriptions.
 - **Rich Task Tracking:** Add interview dates, contact persons, and follow-up reminders.
 - **Real-time UI Updates:** Powered by Zustand for a seamless, lag-free experience.
 
 ### 2. RAG-Powered AI Co-pilot
 - **Resume Matcher:** Upload your resume and get a compatibility score (0-100%) against any job description.
-- **Skill Gap Analysis:** AI identifies missing keywords or skills required for a specific role based on your resume.
-- **Smart Search:** Natural language queries like *"Find all roles where I've interviewed for Senior React positions"* using vector search.
-- **AI Cover Letter Drafts:** Generate tailored cover letters that highlight your most relevant experience for a specific job post.
-- **Usage Rate Limiting:** Implemented via Redis to manage AI API costs and prevent abuse.
+- **Smart Search:** Natural language queries like *"Find all roles where I've interviewed for Senior React positions"* using vector similarity search in NeonDB.
+- **Skill Gap Analysis:** AI identifies matching and missing critical skills based on your uploaded resume.
 
 ### 3. Analytics & Insights
-- **Conversion Funnel:** Visualize your success rate from application to interview to offer.
-- **Market Trends:** Insights into which skills/roles are most frequent in your search history.
+- **Conversion Funnel:** Visualize your success rate from application to interview to offer with Pie Charts.
+- **Activity Tracking:** Bar chart visualization of your application volume over the last 30 days.
 
 ### 4. Enterprise-Grade Security
-- **Multi-Factor Auth:** Secure login via Clerk.
-- **Data Privacy:** Your resumes and applications are encrypted and isolated to your account.
+- **Secure Authentication:** Multi-factor authentication via Clerk.
+- **Protected Routes:** Middleware-level protection for all dashboard and API routes.
 
 ---
 
-## 🛠️ Getting Started (Preview)
+## 🛠️ Getting Started
 
-1. **Clone the repo:** `git clone ...`
-2. **Install dependencies:** `npm install`
-3. **Setup Environment:** Configure `.env.local` with Neon, Clerk, and OpenAI keys.
-4. **Push Schema:** `npx drizzle-kit push:pg`
-5. **Run Dev:** `npm run dev`
+### 1. Clone the repository
+```bash
+git clone <your-repo-url>
+cd application-tracker
+```
+
+### 2. Install dependencies
+```bash
+npm install
+```
+
+### 3. Setup Environment Variables
+Create a `.env.local` file in the root directory and add your credentials:
+```env
+# Clerk Auth
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=...
+CLERK_SECRET_KEY=...
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/dashboard
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
+
+# NeonDB (Postgres)
+DATABASE_URL=...
+
+# Upstash Redis
+UPSTASH_REDIS_REST_URL=...
+UPSTASH_REDIS_REST_TOKEN=...
+
+# OpenAI API
+OPENAI_API_KEY=...
+```
+
+### 4. Push Database Schema
+```bash
+npx drizzle-kit push:pg
+```
+
+### 5. Run the development server
+```bash
+npm run dev
+```
 
 ---
 
-## 🗺️ Roadmap
+## 🗺️ Roadmap Progress
 - [x] Project Initialization & Auth Setup
 - [x] Database Schema & Drizzle Configuration
 - [x] State Management (Zustand) & Redis Setup
-- [ ] Kanban Dashboard Implementation
-- [ ] RAG Integration (Embeddings + Vector Search)
-- [ ] AI Job Summarizer & Matcher
-- [ ] Analytics Dashboard
+- [x] Kanban Dashboard Implementation (Drag-and-Drop)
+- [x] RAG Integration (Embeddings + Vector Search)
+- [x] AI Job Summarizer & Resume Matcher
+- [x] Analytics Dashboard
