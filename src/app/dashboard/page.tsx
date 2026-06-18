@@ -5,8 +5,10 @@ import { db } from "@/db";
 import { applications } from "@/db/schema";
 import { auth } from "@clerk/nextjs/server";
 import { eq, desc } from "drizzle-orm";
+import { syncUser } from "../actions/user";
 
 export default async function DashboardPage() {
+  await syncUser();
   const { userId } = auth();
   
   const userApplications = userId 

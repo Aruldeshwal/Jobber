@@ -29,7 +29,7 @@ export async function smartSearchApplications(query: string) {
     LIMIT 5
   `);
 
-  return results as any[];
+  return results as unknown as any[];
 }
 
 export async function updateApplicationStatus(id: string, status: string) {

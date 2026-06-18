@@ -33,6 +33,6 @@ export async function getAnalyticsData() {
 
   return {
     statusCounts,
-    timelineData: timelineData as any[],
+    timelineData: timelineData as unknown as any[],
   };
 }

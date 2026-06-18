@@ -5,6 +5,7 @@ import { applications } from "@/db/schema";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { syncUser } from "./user";
 
 const applicationSchema = z.object({
   company: z.string().min(1, "Company is required"),
@@ -18,6 +19,7 @@ const applicationSchema = z.object({
 });
 
 export async function createApplication(data: z.infer<typeof applicationSchema>) {
+  await syncUser();
   const { userId } = auth();
 
   if (!userId) {

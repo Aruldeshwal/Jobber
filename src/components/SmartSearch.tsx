@@ -36,7 +36,7 @@ export function SmartSearch() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
+      <DialogTrigger render={
         <div className="relative group cursor-pointer w-full max-w-sm">
           <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
             <Search className="w-4 h-4 text-muted-foreground" />
@@ -50,7 +50,7 @@ export function SmartSearch() {
             <Sparkles className="w-4 h-4 text-primary animate-pulse" />
           </div>
         </div>
-      </DialogTrigger>
+      } />
       <DialogContent className="sm:max-w-[600px] h-[70vh] flex flex-col">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">

@@ -74,12 +74,12 @@ export function AddApplicationModal() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
+      <DialogTrigger render={
         <Button className="flex items-center gap-2">
           <Plus className="w-4 h-4" />
           Add Application
         </Button>
-      </DialogTrigger>
+      } />
       <DialogContent className="sm:max-w-[525px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Add Application</DialogTitle>

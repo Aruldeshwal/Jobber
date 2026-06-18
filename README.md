@@ -1,108 +1,78 @@
-# JobTracker AI: RAG-Powered Application Suite
+# JobTracker AI 🚀
 
-JobTracker AI is a next-generation job application management system that leverages Retrieval-Augmented Generation (RAG) to provide intelligent insights, resume matching, and automated job analysis.
+JobTracker AI is an intelligent, RAG-powered job application suite designed to streamline your job search. By combining modern project management with cutting-edge AI, it helps you track applications, analyze job descriptions, and match your resume to roles with precision.
 
-## 🚀 Finalized Tech Stack
+## ✨ Features
 
-### Frontend & Framework
-- **Next.js 14+ (App Router):** For server-side rendering, routing, and high performance.
-- **Tailwind CSS:** For rapid, responsive UI development.
-- **Shadcn/ui:** For polished, accessible, and consistent components.
-- **Lucide React:** For modern iconography.
+- **📊 Intelligent Kanban Board:** Manage your application funnel with a seamless drag-and-drop interface.
+- **🧠 RAG-Powered Insights:** Automatically summarize job descriptions and identify key requirements using Retrieval-Augmented Generation.
+- **🎯 AI Resume Matcher:** Upload your resume and get instant compatibility scores and skill gap analysis for any job post.
+- **🔍 Smart Search:** Query your entire application history using natural language (e.g., *"Show me high-paying React roles I applied to last month"*).
+- **📈 Advanced Analytics:** Visualize your search progress with conversion funnels and activity charts.
+- **📄 PDF Parsing:** Seamlessly extract and store resume content for localized AI context.
 
-### Backend & Database
-- **NeonDB (PostgreSQL):** Serverless Postgres for application data and RAG features.
-- **pgvector:** Used within NeonDB to store and query vector embeddings for RAG.
-- **Drizzle ORM:** For type-safe database interactions and migrations.
-- **Clerk:** For secure, multi-tenant authentication and user management.
+## 🛠️ Tech Stack
 
-### AI & RAG Integration
-- **Vercel AI SDK:** To orchestrate LLM streams and RAG workflows.
-- **OpenAI:** For job summarization, matching logic, and embedding generation (`text-embedding-3-small`).
-- **pdf-parse:** For server-side extraction of resume content from PDFs.
-- **Zod:** For rigorous schema validation of AI outputs and form data.
+- **Framework:** [Next.js 14](https://nextjs.org/) (App Router)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/) & [Shadcn UI](https://ui.shadcn.com/)
+- **Authentication:** [Clerk](https://clerk.com/)
+- **Database:** [Neon PostgreSQL](https://neon.tech/) with `pgvector`
+- **ORM:** [Drizzle ORM](https://orm.drizzle.team/)
+- **AI Orchestration:** [Vercel AI SDK](https://sdk.vercel.ai/) & [OpenAI](https://openai.com/)
+- **State Management:** [Zustand](https://zustand-demo.pmnd.rs/)
+- **Caching:** [Upstash Redis](https://upstash.com/)
+- **Charts:** [Recharts](https://recharts.org/)
 
-### State & Caching
-- **Zustand:** For lightweight, persistent client-side state management (e.g., UI preferences, Kanban filters).
-- **Upstash Redis:** For fast caching, rate limiting (AI usage), and session management.
+## 🚀 Getting Started
 
----
+### Prerequisites
 
-## ✨ Key Features
+- Node.js 18+ 
+- An OpenAI API Key
+- A Neon Database (Postgres)
+- A Clerk Account (for Auth)
+- An Upstash Redis Instance
 
-### 1. Smart Application Management
-- **Kanban Board:** Interactive drag-and-drop workflow (Applied, Interviewing, Offer, Rejected) powered by `@dnd-kit`.
-- **Automated Job Summarization:** AI automatically extracts key skills and responsibilities from job descriptions.
-- **Rich Task Tracking:** Add interview dates, contact persons, and follow-up reminders.
-- **Real-time UI Updates:** Powered by Zustand for a seamless, lag-free experience.
+### Installation
 
-### 2. RAG-Powered AI Co-pilot
-- **Resume Matcher:** Upload your resume and get a compatibility score (0-100%) against any job description.
-- **Smart Search:** Natural language queries like *"Find all roles where I've interviewed for Senior React positions"* using vector similarity search in NeonDB.
-- **Skill Gap Analysis:** AI identifies matching and missing critical skills based on your uploaded resume.
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/yourusername/jobtracker-ai.git
+   cd jobtracker-ai
+   ```
 
-### 3. Analytics & Insights
-- **Conversion Funnel:** Visualize your success rate from application to interview to offer with Pie Charts.
-- **Activity Tracking:** Bar chart visualization of your application volume over the last 30 days.
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-### 4. Enterprise-Grade Security
-- **Secure Authentication:** Multi-factor authentication via Clerk.
-- **Protected Routes:** Middleware-level protection for all dashboard and API routes.
+3. **Configure environment variables:**
+   Create a `.env.local` file and add the following:
+   ```env
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=...
+   CLERK_SECRET_KEY=...
+   DATABASE_URL=...
+   UPSTASH_REDIS_REST_URL=...
+   UPSTASH_REDIS_REST_TOKEN=...
+   OPENAI_API_KEY=...
+   ```
 
----
+4. **Initialize the database:**
+   ```bash
+   npx drizzle-kit push:pg
+   ```
 
-## 🛠️ Getting Started
+5. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
 
-### 1. Clone the repository
-```bash
-git clone <your-repo-url>
-cd application-tracker
-```
+## 🛡️ Security
 
-### 2. Install dependencies
-```bash
-npm install
-```
+- All user data is isolated at the database level using Clerk IDs.
+- Sensitive API routes are protected by server-side middleware.
+- Resumes are parsed in memory and never stored as public assets.
 
-### 3. Setup Environment Variables
-Create a `.env.local` file in the root directory and add your credentials:
-```env
-# Clerk Auth
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=...
-CLERK_SECRET_KEY=...
-NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
-NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
-NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/dashboard
-NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
+## 📄 License
 
-# NeonDB (Postgres)
-DATABASE_URL=...
-
-# Upstash Redis
-UPSTASH_REDIS_REST_URL=...
-UPSTASH_REDIS_REST_TOKEN=...
-
-# OpenAI API
-OPENAI_API_KEY=...
-```
-
-### 4. Push Database Schema
-```bash
-npx drizzle-kit push:pg
-```
-
-### 5. Run the development server
-```bash
-npm run dev
-```
-
----
-
-## 🗺️ Roadmap Progress
-- [x] Project Initialization & Auth Setup
-- [x] Database Schema & Drizzle Configuration
-- [x] State Management (Zustand) & Redis Setup
-- [x] Kanban Dashboard Implementation (Drag-and-Drop)
-- [x] RAG Integration (Embeddings + Vector Search)
-- [x] AI Job Summarizer & Resume Matcher
-- [x] Analytics Dashboard
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
